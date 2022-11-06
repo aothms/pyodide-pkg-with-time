@@ -1,0 +1,21 @@
+package:
+  name: mytime
+  version: 0.1.0
+
+source:
+  path: simple
+
+build:
+  script: |
+    mkdir build && cd build
+    CXXFLAGS="-sSIDE_MODULE -sWASM_BIGINT" \
+    CFLAGS="-sSIDE_MODULE -sWASM_BIGINT" \
+    LDFLAGS="-sSIDE_MODULE -sWASM_BIGINT" \
+    emcmake cmake .. -DPYTHON_INCLUDE_DIR=/src/pyodide/cpython/installs/python-3.10.2/include/python3.10
+    make
+    touch __init__.py
+
+about:
+  home: n/a
+  license: n/a
+  summary: n/a
