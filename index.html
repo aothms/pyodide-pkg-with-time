@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+    </style>
+  </head>
+  <body class='loading'>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"></script>-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/pyodide/v0.21.3/debug/pyodide.js"></script>
+    <script type="text/javascript">
+      async function main() {
+        let pyodide = await loadPyodide();
+        await pyodide.loadPackage("micropip");
+        const micropip = pyodide.pyimport("micropip");
+        await micropip.install("dist/mytime-0.1.0-py3-none-any.whl");
+        await pyodide.runPython(`
+            import mytime._mytime
+            print(dir(mytime._mytime))
+            print(mytime.mytime.get_time())`);
+      }
+      main();
+    </script>
+  </body>
+</html>
